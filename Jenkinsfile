@@ -40,7 +40,7 @@ pipeline {
         }
 
         failure {
-          emailext(subject: 'Demoapp build failure', to: 'dhgautam@yahoo.com', body: 'Build failure for demoapp Build ${env.JOB_NAME} ')
+          emailext(subject: 'Demoapp build failure', to: 'ci-team@example.com', body: 'Build failure for demoapp Build ${env.JOB_NAME} ')
         }
 
       }
