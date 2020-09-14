@@ -4,6 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Running build in branch ${env.BRANCH_NAME} ...."
+                echo "Adding new piece of code"
             }
         }
         stage('Test') {
