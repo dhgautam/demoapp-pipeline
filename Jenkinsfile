@@ -11,7 +11,7 @@ pipeline {
     stage('Linux Tests') {
       parallel {
         stage('Linux Tests') {
-          steps {
+            steps {
             echo 'Run Linux tests'
             sh 'sh run_linux_tests.sh'
           }
@@ -34,10 +34,20 @@ pipeline {
     }
 
     stage('Deploy Production') {
+      post {
+        always {
+          archiveArtifacts(artifacts: 'target/demoapp.jar', fingerprint: true)
+    }
+
+    failure {
+          mail to: 'ci-team@example.com',
+          subject: "Failed Pipeline ${currentBuild.fullDisplayName}",
+          body: " For details about the failure, see ${env.BUILD_URL}"
+        }
+    }
       steps {
         echo 'Deploy to production'
       }
     }
-
-  }
+}
 }
